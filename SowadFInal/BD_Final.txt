@@ -1,0 +1,42 @@
+create database proyectofinal;
+use proyectofinal;
+
+create table automoviles(
+	id int not null AUTO_INCREMENT primary key,
+    marca varchar(250) not null,
+    linea varchar(250) not null,
+    modelo varchar(250) not null,
+    año varchar(250) not null,
+    precio float not null
+);
+
+create table detalle_venta(
+	id int not null auto_increment primary key,
+    nombre varchar(50) not null,
+    marca varchar(50) not null,
+    linea varchar(50) not null,
+    modelo varchar(50) not null,
+    precio float not null,
+    sede varchar(50) not null,
+    medio_pago varchar(50) not null
+);
+
+create table ventas(
+	id int not null auto_increment primary key,
+    nombre varchar(50) not null,
+    sede varchar(50) not null,
+    total float not null
+);
+
+insert into automoviles values (null,'Chevrolet','Captiva','Camioneta','2020',15000.00);
+insert into automoviles values (null,'Chevrolet','Camaro','Sedan','2020',40000.00);
+insert into automoviles values (null,'Chevrolet','SparkGT','Hashback','2020',20000.00);
+insert into automoviles values (null,'Toyota','Rav4','Camioneta','2020',31000.00);
+insert into automoviles values (null,'Toyota','Corolla','Sedan','2020',15000.00);
+insert into automoviles values (null,'Toyota','Yaris','Hashback','2020',10000.00);
+insert into automoviles values (null,'Ford','Explorer','Camioneta','2020',80000.00);
+insert into automoviles values (null,'Ford','Fusion','Sedan','2020',15000.00);
+insert into automoviles values (null,'Ford','Fiesta','Hashback','2020',22000.00);
+insert into automoviles values (null,'Lamborgini','Aventator','Deportivo','2020',250000.00);
+insert into automoviles values (null,'Ferrari','LaFerrai','Deportivo','2020',400000.00);
+insert into automoviles values (null,'Buggati','Veyron','Deportivo','2020',1200000.00);'
