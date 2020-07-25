@@ -1,0 +1,45 @@
+create database SowadT2;
+
+use sowadt2;
+
+create table fabricante(
+id_fabricante int not null primary key auto_increment,
+nom_fabricante varchar(50) not null 
+);
+create table categoria(
+id_categoria int not null primary key auto_increment,
+nom_categoria varchar(50) not null
+);
+
+insert into fabricante (nom_fabricante) values ('Artesco');
+insert into categoria(nom_categoria) values ('Utiles');
+
+create table producto(
+cod_pro varchar(10) not null primary key,
+desc_pro varchar(50) not null,
+prec_pro decimal(6,2) not null,
+stock_pro int not null,
+stock_compro int not null,
+id_categoria int not null,
+id_fabricante int not null,
+foreign key(id_categoria) references categoria(id_categoria),
+foreign key(id_fabricante) references fabricante(id_fabricante)
+);
+
+delimiter $$
+create trigger Generar_codigo before insert on producto for each row
+begin
+	declare siguiente_codigo int;
+    set siguiente_codigo = (Select ifnull(max(convert(substring(cod_pro,3),signed integer)),0)from producto)+1;
+    set new.cod_pro = concat('P',LPAD(siguiente_codigo,3,'0'));
+end $$ 
+
+insert into producto (desc_pro,prec_pro,stock_pro,stock_compro,id_categoria,id_fabricante) values('Lapiz',1.20,10,0,1,1),('Cuaderno',3.50,20,0,1,1),('Borrador',1.00,30,0,1,1),('Lapicero',2.50,100,0,1,1);
+
+create table pedido(
+cod_pe int not null auto_increment primary key,
+cod_pro varchar(50) not null,
+cant_pro int not null,
+prec_pro float not null,
+foreign key(cod_pro) references producto(cod_pro)
+) 

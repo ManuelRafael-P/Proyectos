@@ -1,0 +1,1 @@
+El proyecto se desarrollo en Netbeans, con db en Mysql y servidor Tomcat.
