@@ -1,0 +1,194 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang10250{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang10\f0\fs22 create database proyecto;\par
+use proyecto;\par
+\par
+\par
+create table areas(\par
+id_area int not null primary key AUTO_INCREMENT,\par
+descripcion_area varchar(20) not null\par
+);\par
+\par
+create table aspirantes(\par
+dni_as varchar(8) not null primary key,\par
+id_postulacion int not null,\par
+nombres_as varchar(100) not null, \par
+apellidos_as varchar(100) not null,\par
+direccion_as varchar(100) not null,\par
+distrito_as varchar(100) not null,\par
+correo_as varchar(100) not null,\par
+telefono_celular_as int not null,\par
+telefono_fijo_as int not null,\par
+fecha_nacimiento_as date not null,\par
+sexo_as char not null,\par
+hijos_as int not null,\par
+id_area int not null,\par
+cv_as varchar(100) not null\par
+);\par
+\par
+create table postulaciones(\par
+id_postulacion int not null primary key AUTO_INCREMENT,\par
+fecha_pos date not null,\par
+dni_pos varchar(11) not null\par
+);\par
+\par
+create table empleados(\par
+id_empleado int primary key not null  AUTO_INCREMENT,\par
+id_contrato int not null,\par
+dni varchar(11) not null,\par
+nombres varchar(100) not null, \par
+apellidos varchar(100) not null,\par
+direccion varchar(100) not null,\par
+distrito varchar(100) not null,\par
+correo varchar(100) not null,\par
+telefono_celular int not null,\par
+telefono_fijo int not null,\par
+fecha_nacimiento date not null,\par
+sexo char not null,\par
+hijos int not null,\par
+id_area int not null\par
+);\par
+\par
+create table contratos(\par
+id_contrato int not null primary key AUTO_INCREMENT,\par
+dni_con varchar(8) not null,\par
+fecha_inicio_con date not null, \par
+duracion_con int not null,\par
+fecha_fin_con date not null,\par
+area_con varchar(100) not null,\par
+cargo_con int not null,\par
+dias_trabajo_con varchar(100) not null,\par
+horario_con varchar(100) not null,\par
+sueldo_con decimal not null,\par
+asignacion_familiar_con decimal not null,\par
+cuenta_con varchar(100) not null,\par
+seguro_con varchar(100) not null\par
+);\par
+\par
+create table citas(\par
+id_cita int not null primary key AUTO_INCREMENT,\par
+dni_as varchar(8) not null,\par
+tipo_cita varchar(100) not null, \par
+fecha_cita date not null,\par
+horario_cita varchar(100) not null,\par
+estado varchar(100) not null\par
+);\par
+\par
+create table hojas_desempleados(\par
+id_hoja int not null primary key AUTO_INCREMENT,\par
+id_empleado int not null,\par
+analista_des varchar(100) not null,\par
+tipo_analisis_des varchar(100) not null,\par
+observaciones_des varchar(500) not null,\par
+eficiencias_des varchar(500) not null,\par
+deficiencias_des varchar(500) not null,\par
+fecha_inicio_des date not null,\par
+duracion_des decimal not null,\par
+fecha_modificacion_des date not null\par
+);\par
+\par
+create table planillas(\par
+id_planilla int not null primary key AUTO_INCREMENT,\par
+id_empleado int not null,\par
+remuneracion_bruta_pla decimal not null,\par
+aporte_obligatorio_pla decimal not null,\par
+remuneracion_neta_pla decimal not null,\par
+dias_trabajados_pla decimal not null,\par
+dias_no_trabajados_pla decimal not null,\par
+pago_x_dia_pla decimal not null,\par
+descuento_faltas_pla decimal not null\par
+);\par
+\par
+create table login_data(\par
+id_empleado int not null primary key,\par
+usuario_log varchar(100) not null,\par
+clave_log varchar(100) not null,\par
+fecha_log date not null,\par
+estado_log int not null,\par
+rango_log int not null\par
+);\par
+\par
+create table informes(\par
+id_informe int not null primary key AUTO_INCREMENT,\par
+id_empleado int not null,\par
+comentarios_inf varchar(500) not null\par
+);\par
+\par
+create table asistencias(\par
+id_asistencia int not null primary key  AUTO_INCREMENT,\par
+id_asistencia_ayuda int not null,\par
+id_empleado int not null,\par
+justificacion_asi varchar(100) not null,\par
+cv_as varchar(100) not null\par
+);\par
+\par
+create table asistencia_ayuda(\par
+id_asistencia_ayuda int not null primary key  AUTO_INCREMENT,\par
+id_empleado int not null, \par
+fecha_asis_ayu date not null,  \par
+descrip_asis int not null,  \par
+estado int not null\par
+);\par
+\par
+\par
+\par
+alter table asistencias add constraint fk_asistencias foreign key  (id_empleado) references empleados(id_empleado);\par
+alter table login_data add constraint fk_login_data foreign key  (id_empleado) references empleados(id_empleado);\par
+alter table informes add constraint fk_informe foreign key  (id_empleado) references empleados(id_empleado);\par
+alter table planillas add constraint fk_planillas foreign key  (id_empleado) references empleados(id_empleado);\par
+alter table hojas_desempleados add constraint fk_hojas_desempleados foreign key  (id_empleado) references empleados(id_empleado);\par
+alter table empleados add constraint fk_contratos foreign key  (id_contrato) references contratos(id_contrato);\par
+alter table aspirantes add constraint fk_aspirantes foreign key  (id_postulacion) references postulaciones(id_postulacion);\par
+alter table aspirantes add constraint fk_areas foreign key  (id_area) references areas(id_area);\par
+\par
+\par
+\par
+insert into asistencia_ayuda values (null,1,"2020/06/25",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/25",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/25",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/24",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/24",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/24",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/23",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/23",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/22",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/22",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/22",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/22",0,0);\par
+insert into asistencia_ayuda values (null,1,"2020/06/22",0,0);\par
+insert into asistencia_ayuda values (null,2,"2020/06/25",1,0);\par
+insert into asistencia_ayuda values (null,2,"2020/06/24",2,0);\par
+insert into asistencia_ayuda values (null,2,"2020/06/23",2,1);\par
+insert into asistencia_ayuda values (null,2,"2020/06/23",1,1);\par
+insert into asistencia_ayuda values (null,2,"2020/06/22",1,1);\par
+insert into asistencia_ayuda values (null,2,"2020/06/22",2,1);\par
+  \par
+insert into postulaciones values(null,"2020/07/11","72145124");\par
+insert into postulaciones values(null,"2020/07/11","72345124");\par
+insert into postulaciones values(null,"2020/07/11","72445124");\par
+insert into postulaciones values(null,"2020/07/11","72545124");\par
+insert into postulaciones values(null,"2020/07/11","72645124");\par
+insert into postulaciones values(null,"2020/07/11","72745124");\par
+insert into postulaciones values(null,"2020/07/11","72845124");\par
+insert into postulaciones values(null,"2020/07/11","72945124");\par
+insert into postulaciones values(null,"2020/07/11","73145124");\par
+insert into postulaciones values(null,"2020/07/11","74145124");\par
+\par
+insert into areas values (null,"RR.HH");\par
+insert into areas values (null,"Logistica");\par
+insert into areas values (null,"Contabilidad");\par
+insert into areas values (null,"Seguridad");\par
+insert into areas values (null,"Almacen");\par
+\par
+insert into aspirantes values ("72145124",2,"Marcos Raul","Jarmaillo Ulises","Av.Los Olivos","Carabayllo","marcos@gmail.com",945786123,6457894,"2000/01/02",0,0,1,"CV.docx");\par
+insert into aspirantes values ("72345124",3,"Luis Alberto","Porras Castro","Av.Los Olivos","Surquillo","luisAlberto@outlook.com",945786123,6457894,"2001/01/10",0,1,2,"CV.docx"); \par
+insert into aspirantes values ("72445124",4,"Luz Celeste","Ramirez Culla","Av.Alfonso Ugarte","Comas","celeste_luz@gmail.com",946786123,5457894,"1998/10/13",1,2,3,"CV.docx"); \par
+insert into aspirantes values ("72545124",5,"Maria Rosario","Medrano Olivar","Av.Los Precursores","Lima","mariaRosario@hotmail.com",947786123,7457894,"1995/06/12",1,1,2,"CV.docx"); \par
+insert into aspirantes values ("72645124",6,"Renato Alfonso","Rafael Paitan","Av.Tupac Amaru","Callao","RenarPaitan@gmail.com",948786123,5647894,"1994/08/11",0,3,5,"CV.docx"); \par
+insert into aspirantes values ("72745124",7,"Junior","Paitan Cordoba","Av.EL Pinar","Miraflores","JuniorPaitan@gmail.com",949786123,7257894,"1991/09/15",0,2,3,"CV.docx"); \par
+insert into aspirantes values ("72845124",8,"Jean Pierre","Fernandez Huaman","Av.Parque Roca","Comas","JeanPierre@gmail.com",955786123,6157894,"1985/02/20",0,1,3,"CV.docx"); \par
+insert into aspirantes values ("72945124",9,"Jesus David","Acha Castillo","Av.Los Incas","Cieneguilla","JesusDavid@gmail.com",965786123,5457894,"2002/12/03",0,0,2,"CV.docx"); \par
+insert into aspirantes values ("73145124",10,"Daniel","Huaripoma Alcidez","Av.Los Claveles","Surco","Daniel_HuariPoma@outlook.com",975786123,7157894,"1997/11/22",0,0,4,"CV.docx"); \par
+insert into aspirantes values ("74145124",11,"Milagros Elizabeth","Paitan Miche","Av.El Olivar","Pueblo Libre","mila_Miche@hotmail.com",985786123,6257894,"1995/07/12",1,0,4,"CV.docx"); \par
+\par
+}
+ 
